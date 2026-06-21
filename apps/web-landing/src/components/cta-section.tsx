@@ -76,7 +76,7 @@ export function CtaSection() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-white/50">
                     Office Details
                   </p>
-                  <h3 className="mt-2 text-title-md font-bold text-white">Algoguido Technologies</h3>
+                  <h3 className="mt-2 text-title-md font-bold text-white">Algoguido Technologies Private Limited</h3>
                   <p className="mt-2 text-body-sm text-white/70">
                     AEC Road, Jalukbari, Guwahati, Assam, India
                   </p>
