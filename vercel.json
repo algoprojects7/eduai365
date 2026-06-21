@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npx turbo run build --filter=@eduai365/web-landing",
+  "outputDirectory": "apps/web-landing/.next"
+}
