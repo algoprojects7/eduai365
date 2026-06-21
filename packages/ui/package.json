@@ -1,0 +1,60 @@
+{
+  "name": "@eduai365/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles": "./src/styles/globals.css"
+  },
+  "files": ["dist", "src/styles"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint src/",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@eduai365/shared-types": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.6.2",
+    "lucide-react": "^0.484.0",
+    "recharts": "^2.15.1",
+    "tailwind-merge": "^3.0.2"
+  },
+  "devDependencies": {
+    "@eduai365/eslint-config": "workspace:*",
+    "@eduai365/ts-config": "workspace:*",
+    "@storybook/addon-essentials": "^8.6.8",
+    "@storybook/addon-interactions": "^8.6.8",
+    "@storybook/addon-links": "^8.6.8",
+    "@storybook/blocks": "^8.6.8",
+    "@storybook/react": "^8.6.8",
+    "@storybook/react-vite": "^8.6.8",
+    "@storybook/test": "^8.6.8",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.22.0",
+    "postcss": "^8.5.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook": "^8.6.8",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "vite": "^6.2.2"
+  }
+}

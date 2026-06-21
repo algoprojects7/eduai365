@@ -1,0 +1,79 @@
+name: Accessibility
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'apps/web-student/**'
+      - 'apps/web-parent/**'
+      - 'packages/ui/**'
+      - '.github/workflows/a11y.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'apps/web-student/**'
+      - 'apps/web-parent/**'
+      - 'packages/ui/**'
+      - '.github/workflows/a11y.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse-student:
+    name: Lighthouse — Student Portal
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build student portal
+        run: pnpm --filter @eduai365/web-student build
+
+      # Stub: wire @lhci/cli once preview URLs or static server targets are configured.
+      - name: Lighthouse CI (stub)
+        run: |
+          echo "Lighthouse CI stub — student portal"
+          echo "Next step: add lighthouserc.json and run lhci autorun against /dashboard"
+          echo "Suggested thresholds: accessibility >= 0.9, best-practices >= 0.9"
+
+  lighthouse-parent:
+    name: Lighthouse — Parent Portal
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build parent portal
+        run: pnpm --filter @eduai365/web-parent build
+
+      # Stub: wire @lhci/cli once preview URLs or static server targets are configured.
+      - name: Lighthouse CI (stub)
+        run: |
+          echo "Lighthouse CI stub — parent portal"
+          echo "Next step: add lighthouserc.json and run lhci autorun against /dashboard"
+          echo "Suggested thresholds: accessibility >= 0.9, best-practices >= 0.9"

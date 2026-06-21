@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AlgoEdu AI">
+  <rect width="512" height="512" rx="112" fill="#0052d2"/>
+  <path fill="#ffffff" d="M176 224c-35.3 0-64 28.7-64 64v96h64v-96c0-17.7 14.3-32 32-32h128c17.7 0 32 14.3 32 32v96h64v-96c0-35.3-28.7-64-64-64H176z"/>
+  <circle cx="208" cy="176" r="56" fill="#ffffff"/>
+  <circle cx="336" cy="176" r="56" fill="#ffffff"/>
+  <circle cx="272" cy="128" r="40" fill="#7c3aed"/>
+</svg>

@@ -1,0 +1,19 @@
+@import '@eduai365/ui/styles';
+
+@keyframes ai-reply-highlight {
+  0% {
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.6), 0 0 20px rgba(124, 58, 237, 0.3);
+    background-color: rgba(124, 58, 237, 0.08);
+    border-color: rgba(124, 58, 237, 1);
+  }
+  60% {
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.15);
+    background-color: rgba(124, 58, 237, 0.04);
+    border-color: rgba(124, 58, 237, 0.6);
+  }
+  100% {
+    box-shadow: none;
+    background-color: rgb(249, 250, 251);
+    border-color: rgb(243, 244, 246);
+  }
+}

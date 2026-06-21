@@ -1,0 +1,7 @@
+{
+  "extends": "@eduai365/ts-config/nestjs.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules", "dist"]
+}

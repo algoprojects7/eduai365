@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-school
+  namespace: educore
+  labels:
+    app: web-school
+    app.kubernetes.io/name: web-school
+    app.kubernetes.io/component: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-school
+  template:
+    metadata:
+      labels:
+        app: web-school
+    spec:
+      containers:
+        - name: web-school
+          image: educore/web-school:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3002
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3002"
+            - name: NEXT_PUBLIC_API_URL
+              value: http://api.educore.local
+          readinessProbe:
+            httpGet:
+              path: /en
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /en
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 300m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-school
+  namespace: educore
+  labels:
+    app: web-school
+spec:
+  type: ClusterIP
+  selector:
+    app: web-school
+  ports:
+    - name: http
+      port: 3002
+      targetPort: http

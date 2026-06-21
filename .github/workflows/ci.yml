@@ -1,0 +1,165 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck all packages
+        run: pnpm typecheck
+
+  build:
+    name: Build all apps
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build monorepo (Turbo)
+        run: pnpm build
+
+      - name: Verify all application builds
+        run: |
+          pnpm --filter @eduai365/api-gateway build
+          pnpm --filter @eduai365/web-landing build
+          pnpm --filter @eduai365/web-admin build
+          pnpm --filter @eduai365/web-school build
+          pnpm --filter @eduai365/web-teacher build
+          pnpm --filter @eduai365/web-student build
+          pnpm --filter @eduai365/web-parent build
+
+  docker-compose-validate:
+    name: Validate Docker Compose
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate default profile
+        run: docker compose config --quiet
+
+      - name: Validate monitoring profile
+        run: docker compose --profile monitoring config --quiet
+
+  e2e:
+    name: E2E (optional)
+    runs-on: ubuntu-latest
+    needs: [build]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Start infrastructure
+        run: docker compose up -d postgres redis
+
+      - name: Wait for PostgreSQL
+        run: |
+          for i in $(seq 1 30); do
+            docker compose exec -T postgres pg_isready -U educore -d educore_ai && exit 0
+            sleep 2
+          done
+          echo "PostgreSQL did not become ready in time"
+          exit 1
+
+      - name: Prepare database
+        run: |
+          pnpm db:migrate
+          pnpm db:seed
+        env:
+          DATABASE_URL: postgresql://educore:educore_dev@localhost:5432/educore_ai
+
+      - name: Install Playwright browsers
+        run: pnpm --filter @eduai365/e2e exec playwright install --with-deps chromium
+
+      - name: Start full stack
+        run: |
+          pnpm dev:phase16 > /tmp/educore-dev.log 2>&1 &
+          echo $! > /tmp/educore-dev.pid
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:4000/api/v1/health && curl -sf http://localhost:3000 && exit 0
+            sleep 5
+          done
+          echo "Stack did not become ready — see /tmp/educore-dev.log"
+          tail -n 80 /tmp/educore-dev.log || true
+          exit 1
+        env:
+          DATABASE_URL: postgresql://educore:educore_dev@localhost:5432/educore_ai
+          REDIS_URL: redis://localhost:6379
+
+      - name: Run E2E tests
+        run: pnpm test:e2e
+
+      - name: Stop dev stack
+        if: always()
+        run: |
+          if [ -f /tmp/educore-dev.pid ]; then
+            kill "$(cat /tmp/educore-dev.pid)" || true
+          fi

@@ -1,0 +1,193 @@
+import type { PermissionCode, UserRole } from '@eduai365/shared-types';
+
+import {
+  ACADEMICS,
+  ALL_PERMISSION_CODES,
+  COUNSELLING,
+  EXAMS,
+  EXTENDED,
+  FINANCE,
+  HOSTEL,
+  HR,
+  LIBRARY,
+  NOTIFICATIONS,
+  SCHOOL,
+  STUDENTS,
+  TRANSPORT,
+} from './permissions.js';
+
+const SCHOOL_SCOPED_PERMISSIONS: readonly PermissionCode[] = ALL_PERMISSION_CODES.filter(
+  (code) => !code.startsWith('super_admin:'),
+);
+
+const SCHOOL_ADMIN_PERMISSIONS: readonly PermissionCode[] = SCHOOL_SCOPED_PERMISSIONS;
+
+const PRINCIPAL_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(SCHOOL),
+  ...Object.values(STUDENTS),
+  ...Object.values(FINANCE),
+  ...Object.values(ACADEMICS),
+  ...Object.values(HR),
+  ...Object.values(LIBRARY),
+  ...Object.values(TRANSPORT),
+  ...Object.values(HOSTEL),
+  ...Object.values(EXAMS),
+  ...Object.values(NOTIFICATIONS),
+  ...Object.values(COUNSELLING),
+  ...Object.values(EXTENDED),
+];
+
+const VICE_PRINCIPAL_PERMISSIONS: readonly PermissionCode[] = [
+  SCHOOL.SETTINGS_READ,
+  SCHOOL.USERS_READ,
+  SCHOOL.REPORTS_READ,
+  STUDENTS.READ,
+  STUDENTS.WRITE,
+  STUDENTS.ATTENDANCE_READ,
+  STUDENTS.ATTENDANCE_WRITE,
+  ACADEMICS.CLASSES_READ,
+  ACADEMICS.CLASSES_WRITE,
+  ACADEMICS.ASSIGNMENTS_READ,
+  ACADEMICS.ASSIGNMENTS_WRITE,
+  ACADEMICS.GRADES_READ,
+  ACADEMICS.GRADES_WRITE,
+  EXAMS.SCHEDULE_READ,
+  EXAMS.SCHEDULE_WRITE,
+  EXAMS.RESULTS_READ,
+  EXAMS.RESULTS_WRITE,
+  FINANCE.FEES_READ,
+  FINANCE.PAYMENTS_READ,
+  NOTIFICATIONS.READ,
+  NOTIFICATIONS.SEND,
+  COUNSELLING.SESSIONS_READ,
+];
+
+const TEACHER_PERMISSIONS: readonly PermissionCode[] = [
+  STUDENTS.READ,
+  STUDENTS.ATTENDANCE_READ,
+  STUDENTS.ATTENDANCE_WRITE,
+  ACADEMICS.CLASSES_READ,
+  ACADEMICS.ASSIGNMENTS_READ,
+  ACADEMICS.ASSIGNMENTS_WRITE,
+  ACADEMICS.GRADES_READ,
+  ACADEMICS.GRADES_WRITE,
+  EXAMS.SCHEDULE_READ,
+  EXAMS.RESULTS_READ,
+  NOTIFICATIONS.READ,
+];
+
+const STUDENT_PERMISSIONS: readonly PermissionCode[] = [
+  STUDENTS.READ,
+  STUDENTS.ATTENDANCE_READ,
+  ACADEMICS.ASSIGNMENTS_READ,
+  ACADEMICS.GRADES_READ,
+  EXAMS.SCHEDULE_READ,
+  EXAMS.RESULTS_READ,
+  NOTIFICATIONS.READ,
+];
+
+const PARENT_PERMISSIONS: readonly PermissionCode[] = [
+  STUDENTS.READ,
+  STUDENTS.ATTENDANCE_READ,
+  FINANCE.FEES_READ,
+  FINANCE.PAYMENTS_READ,
+  ACADEMICS.GRADES_READ,
+  EXAMS.SCHEDULE_READ,
+  EXAMS.RESULTS_READ,
+  NOTIFICATIONS.READ,
+];
+
+const ACCOUNTANT_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(FINANCE),
+  STUDENTS.READ,
+  SCHOOL.REPORTS_READ,
+  EXTENDED.ASSETS_READ,
+  EXTENDED.INVENTORY_READ,
+];
+
+const RECEPTIONIST_PERMISSIONS: readonly PermissionCode[] = [
+  STUDENTS.READ,
+  STUDENTS.ADMISSIONS_MANAGE,
+  SCHOOL.USERS_READ,
+  NOTIFICATIONS.READ,
+  NOTIFICATIONS.SEND,
+  EXTENDED.ASSETS_READ,
+  EXTENDED.INVENTORY_READ,
+];
+
+const LIBRARIAN_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(LIBRARY),
+  STUDENTS.READ,
+];
+
+const TRANSPORT_MANAGER_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(TRANSPORT),
+  STUDENTS.READ,
+];
+
+const HR_MANAGER_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(HR),
+  SCHOOL.USERS_READ,
+  SCHOOL.USERS_WRITE,
+];
+
+const HOSTEL_WARDEN_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(HOSTEL),
+  STUDENTS.READ,
+  STUDENTS.ATTENDANCE_READ,
+];
+
+const EXAM_CONTROLLER_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(EXAMS),
+  ACADEMICS.CLASSES_READ,
+  STUDENTS.READ,
+];
+
+const COUNSELLOR_PERMISSIONS: readonly PermissionCode[] = [
+  ...Object.values(COUNSELLING),
+  STUDENTS.READ,
+  STUDENTS.ATTENDANCE_READ,
+];
+
+export const ROLE_PERMISSIONS: Record<UserRole, readonly PermissionCode[]> = {
+  SUPER_ADMIN: ALL_PERMISSION_CODES,
+  SCHOOL_ADMIN: SCHOOL_ADMIN_PERMISSIONS,
+  PRINCIPAL: PRINCIPAL_PERMISSIONS,
+  VICE_PRINCIPAL: VICE_PRINCIPAL_PERMISSIONS,
+  TEACHER: TEACHER_PERMISSIONS,
+  STUDENT: STUDENT_PERMISSIONS,
+  PARENT: PARENT_PERMISSIONS,
+  ACCOUNTANT: ACCOUNTANT_PERMISSIONS,
+  RECEPTIONIST: RECEPTIONIST_PERMISSIONS,
+  LIBRARIAN: LIBRARIAN_PERMISSIONS,
+  TRANSPORT_MANAGER: TRANSPORT_MANAGER_PERMISSIONS,
+  HR_MANAGER: HR_MANAGER_PERMISSIONS,
+  HOSTEL_WARDEN: HOSTEL_WARDEN_PERMISSIONS,
+  EXAM_CONTROLLER: EXAM_CONTROLLER_PERMISSIONS,
+  COUNSELLOR: COUNSELLOR_PERMISSIONS,
+};
+
+export function getPermissionsForRole(role: UserRole): readonly PermissionCode[] {
+  return ROLE_PERMISSIONS[role];
+}
+
+export function hasPermission(
+  permissions: readonly PermissionCode[],
+  required: PermissionCode,
+): boolean {
+  return permissions.includes(required);
+}
+
+export function hasAnyPermission(
+  permissions: readonly PermissionCode[],
+  required: readonly PermissionCode[],
+): boolean {
+  return required.some((code) => permissions.includes(code));
+}
+
+export function hasAllPermissions(
+  permissions: readonly PermissionCode[],
+  required: readonly PermissionCode[],
+): boolean {
+  return required.every((code) => permissions.includes(code));
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@eduai365/api-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "nest build",
+    "dev": "nest start --watch",
+    "start": "node dist/main.js",
+    "start:prod": "node dist/main.js",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@eduai365/config": "workspace:*",
+    "@eduai365/database": "workspace:*",
+    "@eduai365/rbac": "workspace:*",
+    "@eduai365/shared-types": "workspace:*",
+    "@eduai365/shared-utils": "workspace:*",
+    "@nestjs/common": "^11.0.12",
+    "@nestjs/core": "^11.0.12",
+    "@nestjs/jwt": "^11.0.0",
+    "@nestjs/passport": "^11.0.5",
+    "@nestjs/platform-express": "^11.0.12",
+    "@nestjs/platform-socket.io": "^11.1.27",
+    "@nestjs/swagger": "^11.1.0",
+    "@nestjs/websockets": "^11.1.27",
+    "bcryptjs": "^3.0.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "dotenv": "^16.4.7",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "@eduai365/eslint-config": "workspace:*",
+    "@eduai365/ts-config": "workspace:*",
+    "@nestjs/cli": "^11.0.5",
+    "@nestjs/schematics": "^11.0.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.10",
+    "@types/passport-jwt": "^4.0.1",
+    "eslint": "^9.22.0",
+    "typescript": "^5.8.3"
+  }
+}

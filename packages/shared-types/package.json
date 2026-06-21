@@ -1,0 +1,25 @@
+{
+  "name": "@eduai365/shared-types",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "@eduai365/eslint-config": "workspace:*",
+    "@eduai365/ts-config": "workspace:*",
+    "eslint": "^9.22.0",
+    "typescript": "^5.8.3"
+  }
+}

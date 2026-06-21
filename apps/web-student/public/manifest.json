@@ -1,0 +1,27 @@
+{
+  "name": "eduAI365 — Student Portal",
+  "short_name": "eduai365 Student",
+  "description": "Mobile-friendly student dashboard for courses, assignments, timetable, and AI study coaching.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8f9ff",
+  "theme_color": "#0052d2",
+  "lang": "en",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

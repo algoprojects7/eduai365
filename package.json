@@ -1,0 +1,53 @@
+{
+  "name": "eduai365",
+  "version": "0.1.0",
+  "private": true,
+  "description": "eduAI365 — Multi-Tenant K-12 School Operating System",
+  "scripts": {
+    "dev": "pnpm --filter @eduai365/ui build && turbo run dev",
+    "dev:clean": "pnpm --filter @eduai365/ui build && node scripts/clean-dev-cache.js && turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css,yml,yaml}\"",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "storybook": "pnpm --filter @eduai365/ui storybook",
+    "db:generate": "pnpm --filter @eduai365/database generate",
+    "db:migrate": "pnpm --filter @eduai365/database migrate:dev",
+    "db:seed": "pnpm --filter @eduai365/database seed",
+    "db:studio": "pnpm --filter @eduai365/database studio",
+    "dev:landing": "pnpm --filter @eduai365/web-landing dev",
+    "dev:admin": "pnpm --filter @eduai365/web-admin dev",
+    "dev:api": "pnpm --filter @eduai365/api-gateway dev",
+    "dev:school": "pnpm --filter @eduai365/web-school dev",
+    "dev:teacher": "pnpm --filter @eduai365/web-teacher dev",
+    "dev:student": "pnpm --filter @eduai365/web-student dev",
+    "dev:parent": "pnpm --filter @eduai365/web-parent dev",
+    "dev:phase3": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin",
+    "dev:phase4": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin --filter=@eduai365/web-school",
+    "dev:phase5": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin --filter=@eduai365/web-school",
+    "dev:phase6": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin --filter=@eduai365/web-school",
+    "dev:phase7": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin --filter=@eduai365/web-school --filter=@eduai365/web-teacher --filter=@eduai365/web-student --filter=@eduai365/web-parent",
+    "dev:phase8": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin --filter=@eduai365/web-school --filter=@eduai365/web-teacher --filter=@eduai365/web-student --filter=@eduai365/web-parent",
+    "dev:phase9": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin --filter=@eduai365/web-school --filter=@eduai365/web-teacher --filter=@eduai365/web-student --filter=@eduai365/web-parent",
+    "dev:phase16": "turbo run dev --filter=@eduai365/api-gateway --filter=@eduai365/web-landing --filter=@eduai365/web-admin --filter=@eduai365/web-school --filter=@eduai365/web-teacher --filter=@eduai365/web-student --filter=@eduai365/web-parent",
+    "test:e2e": "pnpm --filter @eduai365/e2e test",
+    "docker:monitoring": "docker compose --profile monitoring up -d"
+  },
+  "devDependencies": {
+    "@eduai365/eslint-config": "workspace:*",
+    "@eduai365/ts-config": "workspace:*",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
