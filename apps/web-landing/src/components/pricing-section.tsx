@@ -70,7 +70,7 @@ const PLANS: PricingPlan[] = [
     billedAnnuallyText: 'Negotiation price per year',
     billedMonthlyText: 'Custom volume billing',
     ctaText: 'Contact Sales',
-    ctaHref: 'mailto:eduai365.erp@gmail.com',
+    ctaHref: '#sales',
     ctaVariant: 'secondary',
     popular: false,
     features: [
@@ -333,7 +333,7 @@ export function PricingSection() {
                       )}
                     />
                   </button>
-                  
+
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
