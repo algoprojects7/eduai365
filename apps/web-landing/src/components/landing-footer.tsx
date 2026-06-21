@@ -145,7 +145,7 @@ export function LandingFooter() {
           © {new Date().getFullYear()} eduAI365. Powering the future of higher education administration.
         </p>
         <p className="text-body-md text-white/50 text-center">
-          Powered by <span className="text-gradient-ai font-semibold">Algoguido Technologies Pvt Ltd</span>
+          Powered by <a href="https://algoguido.com" target="new"><span className="text-gradient-ai font-semibold">Algoguido Technologies Pvt Ltd</span></a>
         </p>
         <div className="flex items-center gap-4">
           {/* <Link href="https://twitter.com" className="text-white/50 hover:text-ai-cyan" aria-label="Twitter">
