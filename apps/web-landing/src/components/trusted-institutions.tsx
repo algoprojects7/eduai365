@@ -78,7 +78,7 @@ export function TrustedInstitutions({ schools }: TrustedInstitutionsProps) {
               Trusted by leading institutions
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-body-lg text-on-surface-variant">
-              Join Schools, Colleges, Universities, and Coaching Centres that run everyday operations in one calm, easy place.
+              Join Schools, and Coaching Centres that run everyday operations in one calm, easy place.
             </p>
           </div>
         </RevealOnScroll>
