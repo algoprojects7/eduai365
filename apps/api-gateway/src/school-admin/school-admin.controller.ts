@@ -26,10 +26,29 @@ import { SchoolAdminService } from './school-admin.service';
 
 type ApiResult = Promise<{ success: boolean; data: unknown; timestamp: string }>;
 
+const SCHOOL_STAFF_ROLES = [
+  'SUPER_ADMIN',
+  'SCHOOL_ADMIN',
+  'PRINCIPAL',
+  'VICE_PRINCIPAL',
+  'TEACHER',
+  'ACCOUNTANT',
+  'RECEPTIONIST',
+  'LIBRARIAN',
+  'TRANSPORT_MANAGER',
+  'HR_MANAGER',
+  'HOSTEL_WARDEN',
+  'EXAM_CONTROLLER',
+  'COUNSELLOR',
+  'CLUB_MANAGER',
+  'ASSET_MANAGER',
+  'OPERATOR',
+] as const;
+
 @ApiTags('school-admin')
 @ApiBearerAuth()
 @ApiHeader({ name: 'X-Tenant-Slug', description: 'School tenant slug', required: true })
-@Roles('SUPER_ADMIN', 'SCHOOL_ADMIN', 'PRINCIPAL', 'VICE_PRINCIPAL')
+@Roles(...SCHOOL_STAFF_ROLES)
 @Controller('school')
 export class SchoolAdminController {
   constructor(private readonly schoolAdmin: SchoolAdminService) {}
@@ -44,7 +63,6 @@ export class SchoolAdminController {
   }
 
   @Get('profile')
-  @Permissions('school:settings:read')
   @ApiOperation({ summary: 'Current school branding and plan' })
   async profile(@CurrentUser() user: AuthenticatedUser): ApiResult {
     const tenant = assertTenantAccess(user);

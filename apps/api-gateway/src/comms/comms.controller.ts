@@ -32,6 +32,8 @@ import type {
   ListNoticesQueryDto,
   UpdateNoticeDto,
 } from './dto/notices.dto';
+import { CreateSocialPostDto } from './dto/social.dto';
+import { moderateContent } from './utils/moderation.util';
 
 type ApiResult = Promise<{ success: boolean; data: unknown; timestamp: string }>;
 
@@ -196,6 +198,28 @@ export class CommsController {
   ): ApiResult {
     const tenant = assertTenantAccess(user);
     const data = await this.comms.listLogs(tenant, query);
+    return { success: true, data, timestamp: new Date().toISOString() };
+  }
+
+  @Get('social')
+  @Permissions('notifications:read')
+  @ApiOperation({ summary: 'List social network posts' })
+  async listSocialPosts(@CurrentUser() user: AuthenticatedUser): ApiResult {
+    const tenant = assertTenantAccess(user);
+    const data = await this.comms.listSocialPosts(tenant);
+    return { success: true, data, timestamp: new Date().toISOString() };
+  }
+
+  @Post('social')
+  @Permissions('notifications:read')
+  @ApiOperation({ summary: 'Share a constructive post on the social network' })
+  async createSocialPost(
+    @Body() dto: CreateSocialPostDto,
+    @CurrentUser() user: AuthenticatedUser,
+  ): ApiResult {
+    const tenant = assertTenantAccess(user);
+    await moderateContent(dto.content);
+    const data = await this.comms.createSocialPost(tenant, dto.content, user);
     return { success: true, data, timestamp: new Date().toISOString() };
   }
 

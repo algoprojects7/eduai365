@@ -14,6 +14,7 @@ import {
   LayoutDashboard,
   LogOut,
   Wallet,
+  Users,
 } from 'lucide-react';
 import { AuthGuard } from '@/components/auth-guard';
 import { apiFetch } from '@/lib/api';
@@ -22,13 +23,14 @@ import { clearTokens } from '@/lib/auth';
 import { getInitials } from '@/lib/format';
 
 const NAV_ITEMS = [
-  { id: 'dashboard',   label: 'Dashboard',    icon: LayoutDashboard, href: '/dashboard' },
-  { id: 'courses',     label: 'My Courses',   icon: BookOpen,        href: '/courses' },
-  { id: 'assignments', label: 'Assignments',  icon: ClipboardList,   href: '/assignments' },
-  { id: 'timetable',   label: 'Timetable',    icon: CalendarDays,    href: '/timetable' },
-  { id: 'fees',        label: 'Fees',         icon: Wallet,          href: '/fees' },
-  { id: 'results',     label: 'Results',      icon: Award,           href: '/results' },
-  { id: 'attendance',  label: 'Attendance',   icon: CalendarDays,    href: '/attendance' },
+  { id: 'dashboard',   label: 'Dashboard',      icon: LayoutDashboard, href: '/dashboard' },
+  { id: 'courses',     label: 'My Courses',     icon: BookOpen,        href: '/courses' },
+  { id: 'assignments', label: 'Assignments',    icon: ClipboardList,   href: '/assignments' },
+  { id: 'timetable',   label: 'Timetable',      icon: CalendarDays,    href: '/timetable' },
+  { id: 'fees',        label: 'Fees',           icon: Wallet,          href: '/fees' },
+  { id: 'results',     label: 'Results',        icon: Award,           href: '/results' },
+  { id: 'attendance',  label: 'Attendance',     icon: CalendarDays,    href: '/attendance' },
+  { id: 'social',      label: 'Social Network', icon: Users,           href: '/comms/social' },
 ];
 
 const FOOTER_LINK_GROUPS = [

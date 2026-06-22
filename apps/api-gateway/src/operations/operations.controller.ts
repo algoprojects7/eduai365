@@ -55,6 +55,10 @@ const OPS_ROLES = [
   'COUNSELLOR',
   'RECEPTIONIST',
   'TEACHER',
+  'CLUB_MANAGER',
+  'ASSET_MANAGER',
+  'OPERATOR',
+  'HR_MANAGER',
 ] as const;
 
 @ApiTags('operations')

@@ -37,7 +37,6 @@ export class PdfController {
   constructor(private readonly pdf: PdfService) {}
 
   @Post('generate')
-  @Permissions('school:reports:read')
   @ApiOperation({
     summary: 'Generate PDF or HTML document (report cards, receipts, salary slips)',
   })

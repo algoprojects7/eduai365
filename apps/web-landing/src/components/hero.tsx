@@ -18,9 +18,9 @@ const HeroScene = dynamic(
 );
 
 const STATS = [
-  { value: '500K+', label: 'Student Capacity' },
-  { value: '200', label: 'Schools · 4 VPS' },
-  { value: '18+', label: 'AI Modules' },
+  { value: 'Scale-Ready', label: 'Built for Institutions of Every Size' },
+  { value: 'Multi-School', label: 'Designed for Multi-School Deployments' },
+  { value: '27+', label: 'Integrated School Management Modules' },
 ];
 
 export function Hero() {
@@ -54,6 +54,7 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-container flex-col items-center justify-center px-4 pb-28 pt-24 text-center md:px-8 md:pt-28">
         <motion.div
+          key={motionReady ? 'animated' : 'static'}
           variants={heroStagger.container}
           initial={motionReady ? 'initial' : false}
           animate="animate"
@@ -63,7 +64,7 @@ export function Hero() {
             <div className="premium-badge mb-8 inline-flex items-center gap-2 px-4 py-1.5">
               <Sparkles className="h-4 w-4 text-ai-cyan" aria-hidden />
               <span className="text-label-md font-medium text-ai-cyan">
-                Explore the AI-Powered Digital Backbone of Modern Schools
+                The Complete AI-Powered School Operating System
               </span>
             </div>
           </motion.div>
@@ -72,22 +73,31 @@ export function Hero() {
             variants={heroStagger.item}
             className="max-w-5xl text-[2.75rem] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[3.5rem] md:leading-[1.05]"
           >
-            <span className="block text-gradient-cinematic">Run your campus,</span>
+            <span className="block text-gradient-cinematic">The Complete AI-Powered</span>
             <span className="block text-gradient-cinematic">
-              with <span className="text-gradient-ai">insights.</span>
-            </span>
-            <span className="mt-4 block text-xl font-medium tracking-normal text-white/70 md:text-[1.5rem]">
-              The complete AI-Powered School OS
+              School <span className="text-gradient-ai">Operating System</span>
             </span>
           </motion.h1>
 
           <motion.p
             variants={heroStagger.item}
-            className="mt-8 max-w-xl text-base leading-relaxed text-white/60 md:max-w-2xl md:text-lg"
+            className="mt-6 max-w-xl text-base leading-relaxed text-white/60 md:max-w-2xl md:text-lg"
           >
-            Bring students, faculty, and operations into one calm place — and turn everyday
-            academic data into insights when you need them.
+            Manage Admissions, Academics, Attendance, Finance, Transport, Communication,
+            and AI-Powered Insights — from a Single Unified Platform.
           </motion.p>
+
+          <motion.div
+            variants={heroStagger.item}
+            className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          >
+            <a
+              href="#demo"
+              className={cn(buttonVariants({ variant: 'ai', size: 'pill' }), 'px-8 py-3 text-base font-semibold')}
+            >
+              Book a Live Demo
+            </a>
+          </motion.div>
 
 
 

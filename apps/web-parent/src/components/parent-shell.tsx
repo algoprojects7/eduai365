@@ -16,6 +16,7 @@ import {
   Award,
   MapPin,
   KeyRound,
+  Users,
 } from 'lucide-react';
 import { AuthGuard } from '@/components/auth-guard';
 import { apiFetch } from '@/lib/api';
@@ -33,6 +34,7 @@ const NAV_ITEMS = [
   { id: 'results', label: 'Results', icon: Award, href: '/results' },
   { id: 'gps-tracking', label: 'GPS Tracking', icon: MapPin, href: '/gps-tracking' },
   { id: 'ai-alerts', label: 'AI Alerts', icon: Sparkles, href: '/ai-alerts' },
+  { id: 'social', label: 'Social Network', icon: Users, href: '/comms/social' },
 ];
 
 const FOOTER_LINK_GROUPS = [

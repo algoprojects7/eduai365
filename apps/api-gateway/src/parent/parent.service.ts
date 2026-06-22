@@ -5,6 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import type { TenantContext } from '@eduai365/shared-types';
+import { buildSchoolPortalUrl } from '@eduai365/config';
 import {
   computeGrade,
   decimalToNumber,
@@ -360,7 +361,11 @@ export class ParentService {
     const unpaidInvoice = list.find((inv) => inv.outstanding > 0);
     const dueDate = unpaidInvoice?.dueDate ?? list[0]?.dueDate ?? new Date().toISOString();
     const status = outstanding > 0 ? 'UNPAID' : 'PAID';
-    const paymentUrl = `http://localhost:3005/fees?studentId=${studentId}&sessionEnded=${isSessionEnded}`;
+    const paymentUrl = buildSchoolPortalUrl(
+      tenant.slug,
+      'PARENT',
+      `/fees?studentId=${studentId}&sessionEnded=${isSessionEnded}`,
+    );
 
     return {
       outstanding,

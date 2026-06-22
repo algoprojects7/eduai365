@@ -15,7 +15,10 @@ export type UserRole =
   | 'HR_MANAGER'
   | 'HOSTEL_WARDEN'
   | 'EXAM_CONTROLLER'
-  | 'COUNSELLOR';
+  | 'COUNSELLOR'
+  | 'CLUB_MANAGER'
+  | 'ASSET_MANAGER'
+  | 'OPERATOR';
 
 export interface ApiResponse<T> {
   success: boolean;

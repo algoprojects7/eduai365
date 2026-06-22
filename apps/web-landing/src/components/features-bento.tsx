@@ -30,9 +30,11 @@ import {
   MessageSquare,
   Bell,
   Cake,
+  MessagesSquare,
   type LucideIcon,
 } from 'lucide-react';
 import { cn, RevealOnScroll } from '@eduai365/ui';
+import { useMotionReady } from '@/hooks/use-motion-ready';
 
 /* ────────────────────────────────────────────────── */
 /*  Feature Data                                      */
@@ -228,6 +230,13 @@ const FEATURES: Feature[] = [
     glowColor: 'rgba(239, 68, 68, 0.2)',
   },
   {
+    icon: MessagesSquare,
+    title: 'Social Network',
+    desc: 'A campus-wide social platform for sharing constructive ideas, thoughts, queries, and peer-to-peer support among students, teachers, and staff.',
+    category: ['studentLife'],
+    glowColor: 'rgba(27, 100, 241, 0.2)',
+  },
+  {
     icon: UsersRound,
     title: 'Alumni',
     desc: 'Alumni network — directory, event invitations, mentorship programs, and donation tracking.',
@@ -255,6 +264,7 @@ const FEATURES: Feature[] = [
 /* ────────────────────────────────────────────────── */
 
 function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+  const motionReady = useMotionReady();
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -281,7 +291,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 24, scale: 0.96 }}
+      initial={motionReady ? { opacity: 0, y: 24, scale: 0.96 } : false}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -12, scale: 0.96 }}
       transition={{
@@ -347,7 +357,7 @@ export function FeaturesBento() {
             <span className="text-gradient-ai">AI-Powered School OS</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-on-surface-variant">
-            26 purpose-built modules that cover every facet of campus
+            27 purpose-built modules that cover every facet of campus
             administration — from AI-powered insights to GPS-enabled student
             safety.
           </p>
@@ -384,7 +394,7 @@ export function FeaturesBento() {
         {/* Bottom stat */}
         <RevealOnScroll className="mt-16 text-center">
           <p className="text-body-lg text-on-surface-variant">
-            <span className="text-gradient-ai font-bold text-headline-md">26+</span>{' '}
+            <span className="text-gradient-ai font-bold text-headline-md">27+</span>{' '}
             modules.{' '}
             <span className="text-gradient-ai font-bold text-headline-md">1</span>{' '}
             unified platform.{' '}

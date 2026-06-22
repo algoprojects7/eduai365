@@ -302,6 +302,44 @@ export function PricingSection() {
           })}
         </div>
 
+        {/* Comparison Table */}
+        <RevealOnScroll className="mb-24 mt-4">
+          <div className="mx-auto max-w-4xl">
+            <h3 className="text-headline-md font-bold text-center mb-8 text-on-surface">
+              Plan Comparison
+            </h3>
+            <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
+              <table className="w-full text-left text-body-md">
+                <thead>
+                  <tr className="border-b border-gray-100 bg-surface-faint">
+                    <th className="px-6 py-4 text-body-md font-bold text-on-surface">Feature</th>
+                    <th className="px-6 py-4 text-center text-body-md font-bold text-on-surface">Starter</th>
+                    <th className="px-6 py-4 text-center text-body-md font-bold text-secondary">Pro</th>
+                    <th className="px-6 py-4 text-center text-body-md font-bold text-on-surface">Enterprise</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {[
+                    { feature: 'Students', starter: '750', pro: '1,500', enterprise: 'Unlimited' },
+                    { feature: 'Teachers', starter: 'Included', pro: 'Included', enterprise: 'Included' },
+                    { feature: 'Training', starter: '✓', pro: '✓', enterprise: '✓' },
+                    { feature: 'Mobile App', starter: '✓', pro: '✓', enterprise: '✓' },
+                    { feature: 'WhatsApp Integration', starter: 'Optional', pro: 'Optional', enterprise: 'Custom' },
+                    { feature: 'AI Features', starter: '✓', pro: '✓', enterprise: 'Advanced' },
+                    { feature: 'Multi-Campus', starter: '✗', pro: '✓', enterprise: '✓' },
+                  ].map((row) => (
+                    <tr key={row.feature} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="px-6 py-3.5 font-medium text-on-surface">{row.feature}</td>
+                      <td className="px-6 py-3.5 text-center text-on-surface-variant">{row.starter}</td>
+                      <td className="px-6 py-3.5 text-center font-semibold text-on-surface">{row.pro}</td>
+                      <td className="px-6 py-3.5 text-center text-on-surface-variant">{row.enterprise}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </RevealOnScroll>
 
         {/* FAQ Section */}
         <div id="faq" className="scroll-mt-24" />

@@ -41,8 +41,9 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
 
   if (response.status === 401) {
     clearTokens();
-    if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/login')) {
-      window.location.href = '/login';
+    if (typeof window !== 'undefined' && !window.location.pathname.endsWith('/login')) {
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+      window.location.href = `${basePath}/login`;
     }
     throw new ApiError('Unauthorized', 401);
   }

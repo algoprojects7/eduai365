@@ -8,6 +8,8 @@ import {
 } from '@nestjs/websockets';
 import type { Server, Socket } from 'socket.io';
 
+import { isAllowedOrigin } from '@eduai365/config';
+
 /**
  * WebSocket gateway for real-time in-app notifications and live GPS updates.
  * Clients join school rooms via `schoolSlug` query param or `join-school` message.
@@ -15,14 +17,13 @@ import type { Server, Socket } from 'socket.io';
 @WebSocketGateway({
   namespace: '/notifications',
   cors: {
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'http://localhost:3002',
-      'http://localhost:3003',
-      'http://localhost:3004',
-      'http://localhost:3005',
-    ],
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      if (!origin || isAllowedOrigin(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   },
 })

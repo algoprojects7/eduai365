@@ -6,6 +6,7 @@ import { Linkedin, Send, Twitter, Phone, Mail } from 'lucide-react';
 import { Button, RevealOnScroll } from '@eduai365/ui';
 
 const FOOTER_LINKS = [
+  { label: 'Why eduAI365', href: '#why-choose' },
   { label: 'Features', href: '#features' },
   { label: 'Roles', href: '#roles' },
   { label: 'Pricing', href: '#pricing' },

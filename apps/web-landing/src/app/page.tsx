@@ -12,6 +12,9 @@ import { PricingSection } from '@/components/pricing-section';
 import { SnowParticles } from '@/components/snow-particles';
 import { TrustedInstitutions } from '@/components/trusted-institutions';
 import { WhatsAppChat } from '@/components/whatsapp-chat';
+import { WhySchoolsChoose } from '@/components/why-schools-choose';
+import { AiCapabilities } from '@/components/ai-capabilities';
+import { CompetitiveEdge } from '@/components/competitive-edge';
 import { DEFAULT_SCHOOL_SLUG, fetchSchools } from '@/lib/schools';
 
 export default async function HomePage() {
@@ -24,9 +27,12 @@ export default async function HomePage() {
       <Header />
       <main className="bg-surface">
         <Hero />
+        <WhySchoolsChoose />
         <ModuleMarquee />
         <FeaturesBento />
+        <AiCapabilities />
         <TrustedInstitutions schools={schools} />
+        <CompetitiveEdge />
         <RoleCardsGrid schoolSlug={defaultSchoolSlug} />
         <PricingSection />
         {/* <ResourcesSection /> */}

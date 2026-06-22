@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { config } from '@eduai365/config';
+import { config, isAllowedOrigin } from '@eduai365/config';
 import { AppModule } from './app.module';
 
 process.env.DATABASE_URL = process.env.DATABASE_URL ?? config.databaseUrl;
@@ -12,16 +12,13 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api/v1');
   app.enableCors({
-    origin: [
-      config.appUrl,
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'http://localhost:3002',
-      'http://localhost:3003',
-      'http://localhost:3004',
-      'http://localhost:3005',
-      'http://localhost:6006',
-    ],
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      if (!origin || isAllowedOrigin(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   });
 

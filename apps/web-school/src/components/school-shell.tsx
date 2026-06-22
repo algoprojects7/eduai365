@@ -64,6 +64,7 @@ const NAV_ITEMS = [
   { id: 'report-cards', labelKey: 'reportCards', icon: FileText, href: '/report-cards' },
   { id: 'reports', labelKey: 'reports', icon: BarChart3, href: '/reports' },
   { id: 'comms', labelKey: 'communication', icon: MessageSquare, href: '/comms' },
+  { id: 'social', labelKey: 'socialNetwork', icon: Users, href: '/comms/social' },
   { id: 'finance', labelKey: 'finance', icon: Wallet, href: '/finance' },
   { id: 'hr-employees', labelKey: 'employees', icon: IdCard, href: '/hr/employees' },
   { id: 'hr-leave', labelKey: 'leave', icon: CalendarDays, href: '/hr/leave' },

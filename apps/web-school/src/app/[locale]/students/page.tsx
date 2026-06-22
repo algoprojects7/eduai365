@@ -49,6 +49,11 @@ export default function StudentsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Detailed modal states
+  const [selectedStudent, setSelectedStudent] = useState<any>(null);
+  const [modalLoading, setModalLoading] = useState(false);
+  const [modalError, setModalError] = useState<string | null>(null);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -75,19 +80,33 @@ export default function StudentsPage() {
     };
   }, []);
 
+  async function handleViewStudent(row: StudentRow) {
+    setSelectedStudent({ ...row }); // Show modal immediately with list-level data
+    setModalLoading(true);
+    setModalError(null);
+    try {
+      const detail = await apiFetch<any>(`/school/students/${row.id}`);
+      setSelectedStudent(detail);
+    } catch (err) {
+      setModalError(err instanceof Error ? err.message : 'Failed to load student details');
+    } finally {
+      setModalLoading(false);
+    }
+  }
+
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
     return students.filter((row) => {
       const matchesSearch =
-        !query ||
-        row.admissionNo.toLowerCase().includes(query) ||
-        studentName(row).toLowerCase().includes(query) ||
-        studentClass(row).toLowerCase().includes(query);
+          !query ||
+          row.admissionNo.toLowerCase().includes(query) ||
+          studentName(row).toLowerCase().includes(query) ||
+          studentClass(row).toLowerCase().includes(query);
 
       const matchesStatus =
-        statusTab === 'all' ||
-        (statusTab === 'active' && row.status.toUpperCase() === 'ACTIVE') ||
-        (statusTab === 'inactive' && row.status.toUpperCase() !== 'ACTIVE');
+          statusTab === 'all' ||
+          (statusTab === 'active' && row.status.toUpperCase() === 'ACTIVE') ||
+          (statusTab === 'inactive' && row.status.toUpperCase() !== 'ACTIVE');
 
       return matchesSearch && matchesStatus;
     });
@@ -200,8 +219,8 @@ export default function StudentsPage() {
               {
                 key: 'actions',
                 header: 'Actions',
-                render: () => (
-                  <Button variant="ghost" size="sm">
+                render: (row) => (
+                  <Button variant="ghost" size="sm" onClick={() => handleViewStudent(row)}>
                     View
                   </Button>
                 ),
@@ -210,6 +229,90 @@ export default function StudentsPage() {
           />
         )}
       </div>
+
+      {/* Student Details Modal */}
+      {selectedStudent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[2px] animate-in fade-in duration-200">
+          <div
+            className="w-full max-w-md rounded-2xl border border-gray-200/50 bg-white p-6 shadow-xl animate-in zoom-in-95 duration-200"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+              <h2 className="text-headline-sm font-bold text-on-surface">Student Profile</h2>
+              <button
+                onClick={() => setSelectedStudent(null)}
+                className="rounded-full p-1.5 text-on-surface-variant hover:bg-gray-100 transition-colors text-lg font-semibold"
+                aria-label="Close modal"
+              >
+                &times;
+              </button>
+            </div>
+
+            {modalLoading && !selectedStudent.class && (
+              <div className="py-12 text-center text-on-surface-variant">
+                <div className="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-4 border-secondary border-t-transparent" />
+                Loading detailed profile…
+              </div>
+            )}
+
+            {modalError && (
+              <div className="py-8 text-center text-error bg-error/10 rounded-xl my-4 px-4">{modalError}</div>
+            )}
+
+            {selectedStudent && (!modalLoading || selectedStudent.class) && (
+              <div className="mt-6 space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
+                    <GraduationCap className="h-7 w-7" />
+                  </div>
+                  <div>
+                    <h3 className="text-title-lg font-bold text-on-surface">
+                      {selectedStudent.firstName} {selectedStudent.lastName}
+                    </h3>
+                    <p className="text-body-md text-on-surface-variant">
+                      Admission No: <span className="font-mono font-semibold">{selectedStudent.admissionNo}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-y-4 gap-x-6 border-y border-gray-100 py-5">
+                  <div>
+                    <span className="block text-label-md font-medium text-on-surface-variant">Class</span>
+                    <span className="text-body-md font-semibold text-on-surface mt-0.5 block">
+                      {selectedStudent.class?.name || selectedStudent.className || '—'}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="block text-label-md font-medium text-on-surface-variant">Section</span>
+                    <span className="text-body-md font-semibold text-on-surface mt-0.5 block">
+                      {selectedStudent.section?.name || '—'}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="block text-label-md font-medium text-on-surface-variant">Status</span>
+                    <div className="mt-1">
+                      <StatusBadge status={mapStatus(selectedStudent.status)} />
+                    </div>
+                  </div>
+                  <div>
+                    <span className="block text-label-md font-medium text-on-surface-variant">Enrolled Date</span>
+                    <span className="text-body-md font-semibold text-on-surface mt-0.5 block">
+                      {selectedStudent.createdAt ? new Date(selectedStudent.createdAt).toLocaleDateString() : '—'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex justify-end pt-2">
+                  <Button variant="secondary" onClick={() => setSelectedStudent(null)}>
+                    Close
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </SchoolShell>
   );
 }

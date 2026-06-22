@@ -8,10 +8,16 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - eduai365.com
+        - '*.eduai365.com'
+      secretName: eduai365-tls
   rules:
-    - host: educore.local
+    - host: eduai365.com
       http:
         paths:
           - path: /
@@ -21,17 +27,17 @@ spec:
                 name: web-landing
                 port:
                   number: 3000
-    - host: school.educore.local
+    - host: superadmin.eduai365.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: web-school
+                name: web-admin
                 port:
-                  number: 3002
-    - host: api.educore.local
+                  number: 3001
+    - host: api.eduai365.com
       http:
         paths:
           - path: /
@@ -41,3 +47,34 @@ spec:
                 name: api-gateway
                 port:
                   number: 4000
+    - host: '*.eduai365.com'
+      http:
+        paths:
+          - path: /teacher
+            pathType: Prefix
+            backend:
+              service:
+                name: web-teacher
+                port:
+                  number: 3003
+          - path: /student
+            pathType: Prefix
+            backend:
+              service:
+                name: web-student
+                port:
+                  number: 3004
+          - path: /parent
+            pathType: Prefix
+            backend:
+              service:
+                name: web-parent
+                port:
+                  number: 3005
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-school
+                port:
+                  number: 3002

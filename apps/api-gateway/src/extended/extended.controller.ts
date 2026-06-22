@@ -60,6 +60,8 @@ const EXTENDED_ROLES = [
   'RECEPTIONIST',
   'ACCOUNTANT',
   'HR_MANAGER',
+  'ASSET_MANAGER',
+  'OPERATOR',
 ] as const;
 
 @ApiTags('extended')

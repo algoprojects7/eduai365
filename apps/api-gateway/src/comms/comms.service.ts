@@ -733,4 +733,81 @@ export class CommsService {
       },
     };
   }
+
+  async verifySocialNetworkEnabled(tenant: TenantContext): Promise<void> {
+    const school = await this.prisma.client.school.findUnique({
+      where: { id: tenant.schoolId },
+      select: { settings: true },
+    });
+    const settings = (school?.settings || {}) as { disabledServices?: string[] };
+    if (settings.disabledServices?.includes('social')) {
+      throw new ForbiddenException('Social Network service is disabled for this school');
+    }
+  }
+
+  async listSocialPosts(tenant: TenantContext): Promise<unknown> {
+    await this.verifySocialNetworkEnabled(tenant);
+
+    // Auto-clear chat history older than 10 minutes
+    const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
+    await this.prisma.client.socialPost.deleteMany({
+      where: {
+        schoolId: tenant.schoolId,
+        createdAt: { lt: tenMinutesAgo },
+      },
+    });
+
+    return this.prisma.client.socialPost.findMany({
+      where: { schoolId: tenant.schoolId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            role: true,
+            avatarUrl: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'asc' },
+    });
+  }
+
+  async createSocialPost(
+    tenant: TenantContext,
+    content: string,
+    user: AuthenticatedUser,
+  ): Promise<unknown> {
+    await this.verifySocialNetworkEnabled(tenant);
+
+    const post = await this.prisma.client.socialPost.create({
+      data: {
+        schoolId: tenant.schoolId,
+        userId: user.id,
+        content,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            role: true,
+            avatarUrl: true,
+          },
+        },
+      },
+    });
+
+    await this.audit.log({
+      schoolId: tenant.schoolId,
+      userId: user.id,
+      action: 'CREATE',
+      entity: 'SocialPost',
+      entityId: post.id,
+    });
+
+    return post;
+  }
 }

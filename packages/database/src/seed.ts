@@ -119,6 +119,9 @@ const ROLE_PERMISSIONS: Record<UserRole, readonly string[]> = {
     'reports.view',
   ],
   COUNSELLOR: ['dashboard.view', 'students.view', 'attendance.view', 'reports.view'],
+  CLUB_MANAGER: ['dashboard.view', 'students.view'],
+  ASSET_MANAGER: ['dashboard.view', 'settings.view'],
+  OPERATOR: ['dashboard.view', 'settings.view', 'students.view'],
 };
 
 const PLANS = [

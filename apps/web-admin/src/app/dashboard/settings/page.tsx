@@ -30,6 +30,7 @@ const TOGGLEABLE_SERVICES = [
   { id: 'health', name: 'Health Clinic Logs', description: 'Infirmary visits, student health records' },
   { id: 'clubs', name: 'Clubs & Activities', description: 'Co-curricular clubs and membership roles' },
   { id: 'uniform', name: 'Uniform Inventory', description: 'School uniform stock levels and ordering' },
+  { id: 'social', name: 'Social Network', description: 'Constructive discussion board with role-based restriction and content moderation filters.' },
 ];
 
 export default function SettingsPage() {

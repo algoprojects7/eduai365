@@ -15,6 +15,7 @@ import {
   Users,
   Library,
   Landmark,
+  MessagesSquare,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -31,6 +32,7 @@ const MODULES: { label: string; icon: LucideIcon }[] = [
   { label: 'AI Academic Advisor', icon: Brain },
   { label: 'Library & Archiving', icon: Library },
   { label: 'Finance & Endowment', icon: Landmark },
+  { label: 'Social Network', icon: MessagesSquare },
 ];
 
 function ModuleChip({ label, icon: Icon }: { label: string; icon: LucideIcon }) {

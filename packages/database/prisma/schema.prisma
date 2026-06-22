@@ -31,6 +31,9 @@ enum UserRole {
   HOSTEL_WARDEN
   EXAM_CONTROLLER
   COUNSELLOR
+  CLUB_MANAGER
+  ASSET_MANAGER
+  OPERATOR
 }
 
 enum SubscriptionStatus {
@@ -282,6 +285,7 @@ model School {
   alumniCampaigns         AlumniCampaign[]
   hostelBlocks            HostelBlock[]
   inventoryItems          InventoryItem[]
+  socialPosts             SocialPost[]
 
   @@index([slug])
   @@index([plan])
@@ -338,6 +342,7 @@ model User {
   inAppNotifications    InAppNotification[]
   assetCheckouts        AssetCheckout[]
   consent               UserConsent?
+  socialPosts           SocialPost[]
 
   @@index([schoolId, role])
   @@index([schoolId, isActive])
@@ -1760,3 +1765,18 @@ model UserConsent {
   @@index([userId])
   @@map("user_consents")
 }
+
+model SocialPost {
+  id        String   @id @default(cuid())
+  schoolId  String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, createdAt])
+  @@map("social_posts")
+}
+

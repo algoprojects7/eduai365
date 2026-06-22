@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import type { NextFunction, Request, Response } from 'express';
 import type { TenantPlan } from '@eduai365/shared-types';
+import { PLATFORM_SUBDOMAINS } from '@eduai365/config';
 import { PrismaService } from '../../prisma/prisma.service';
 import { runWithTenant } from './tenant.context';
 
@@ -56,7 +57,7 @@ export class TenantMiddleware implements NestMiddleware {
     const host = req.headers.host ?? '';
     const hostname = host.split(':')[0] ?? host;
     const subdomain = hostname.split('.')[0];
-    if (subdomain && !['localhost', '127', 'api', 'www'].includes(subdomain)) {
+    if (subdomain && !PLATFORM_SUBDOMAINS.includes(subdomain)) {
       return subdomain.toLowerCase();
     }
 

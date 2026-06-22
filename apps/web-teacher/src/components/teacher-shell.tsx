@@ -29,6 +29,7 @@ const NAV_ITEMS = [
   { id: 'gradebook', label: 'Gradebook', icon: BookOpen, href: '/gradebook' },
   { id: 'homework', label: 'Homework', icon: ClipboardList, href: '/homework' },
   { id: 'messages', label: 'Messages', icon: MessageSquare, href: '/messages' },
+  { id: 'social', label: 'Social Network', icon: Users, href: '/comms/social' },
 ];
 
 const FOOTER_LINK_GROUPS = [
