@@ -3,9 +3,9 @@ import '@eduai365/ui/styles';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'eduAI365 — The Complete University & Higher Education OS',
+  title: 'eduAI365 — The Complete AI-Powered School OS',
   description:
-    'Empower your university with AI-driven academic insights, automated course scheduling, and seamless campus administration.',
+    'Empower your schools/institute with AI-driven academic insights, automated course scheduling, and seamless campus administration.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
