@@ -344,7 +344,7 @@ export function FeaturesBento() {
           </div>
           <h2 className="text-headline-lg font-bold tracking-[-0.01em] text-on-surface md:text-display-lg">
             Explore the{' '}
-            <span className="text-gradient-ai">Higher Education OS</span>
+            <span className="text-gradient-ai">AI-Powered School OS</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-on-surface-variant">
             26 purpose-built modules that cover every facet of campus
