@@ -27,7 +27,7 @@ export function LandingFooter() {
             <Image src="/logo.png" alt="eduAI365 Logo" width={140} height={40} className="h-10 w-auto" />
           </div>
           <p className="mt-3 text-body-md text-white/60">
-            AI-driven administration for the next generation of higher education. Unified,
+            AI-driven administration for the next generation of Modern Schools. Unified,
             human-first, and built for every role.
           </p>
         </RevealOnScroll>
@@ -104,10 +104,10 @@ export function LandingFooter() {
                   Email Address
                 </p>
                 <a
-                  href="mailto:eduai365.erp@gmail.com"
+                  href="mailto:app@algoguido.com"
                   className="mt-1 block font-bold text-white/80 hover:text-ai-cyan transition-colors text-body-sm"
                 >
-                  eduai365.erp@gmail.com
+                  app@algoguido.com
                 </a>
               </div>
             </div>
@@ -142,7 +142,7 @@ export function LandingFooter() {
 
       <div className="mx-auto mt-8 flex max-w-container flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 md:flex-row">
         <p className="text-body-md text-white/50 text-center md:text-left">
-          © {new Date().getFullYear()} eduAI365. Powering the future of higher education administration.
+          © {new Date().getFullYear()} eduAI365 - Powering the complete AI-Powered School OS.
         </p>
         <p className="text-body-md text-white/50 text-center">
           Powered by <a href="https://algoguido.com" target="new"><span className="text-gradient-ai font-semibold">Algoguido Technologies Pvt Ltd</span></a>
