@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@eduai365/ui/styles';
 import './globals.css';
+import { ScrollToTop } from '@/components/scroll-to-top';
 
 export const metadata: Metadata = {
   title: 'AI School ERP Software India | School Management System | eduAI365',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="bg-surface">
       <body className="min-h-screen bg-surface font-sans text-on-surface antialiased">
         {children}
+        <ScrollToTop />
       </body>
     </html>
   );
