@@ -42,10 +42,10 @@ export function FranchiseInfo() {
           </div>
           <h2 className="text-headline-md font-bold text-on-surface md:text-headline-lg">
             Become an eduAI365{' '}
-            <span className="text-gradient-ai">Franchise Partner</span>
+            <span className="text-gradient-ai">Franchisee Partner</span>
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-body-lg text-on-surface-variant">
-            Join India&apos;s fastest-growing EdTech franchise network. Represent eduAI365 in your
+            Join India&apos;s fastest-growing EdTech franchisee network. Represent eduAI365 in your
             region and help schools embrace AI-powered administration — while building a
             rewarding business.
           </p>
@@ -80,7 +80,7 @@ export function FranchiseInfo() {
           <RevealOnScroll className="mt-12 text-center">
             <div className="mx-auto max-w-xl rounded-2xl border border-ai-violet/20 bg-gradient-to-br from-ai-violet/5 to-ai-electric/5 p-8">
               <p className="text-body-lg font-semibold text-on-surface">
-                Interested in becoming a franchise partner?
+                Interested in becoming a franchisee partner?
               </p>
               <p className="mt-3 text-xs font-semibold text-on-surface-variant/60 uppercase tracking-wider">
                 WhatsApp
