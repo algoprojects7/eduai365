@@ -108,7 +108,7 @@ export function TrustedInstitutions({ schools }: TrustedInstitutionsProps) {
                   <div className="flex items-start gap-2.5">
                     <BrainCircuit className="mt-0.5 h-4 w-4 shrink-0 text-on-surface-variant/60" strokeWidth={1.5} />
                     <p className="text-body-md text-on-surface-variant">
-                      Principal Data Scientist Instructor, upGrad Education
+                      Former Principal Data Scientist & Instructor, UpGrad Education
                     </p>
                   </div>
                   <div className="flex items-start gap-2.5">

@@ -28,17 +28,15 @@ export function RevealOnScroll({
   direction = 'up',
   amount = 0.12,
 }: RevealOnScrollProps) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount });
   const offset = directionOffset[direction];
 
   return (
     <motion.div
-      ref={ref}
       className={cn(className)}
-      initial={{ opacity: 1, x: offset.x, y: offset.y }}
-      animate={inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 1, x: offset.x, y: offset.y }}
-      transition={{ ...revealOnScroll.transition, delay: inView ? delay : 0 }}
+      initial={{ opacity: 0, x: offset.x, y: offset.y }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, amount }}
+      transition={{ ...revealOnScroll.transition, delay }}
     >
       {children}
     </motion.div>

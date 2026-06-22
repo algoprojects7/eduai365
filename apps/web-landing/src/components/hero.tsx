@@ -9,7 +9,6 @@ import { HeroBackground } from '@/components/hero-background';
 import { HeroParticles } from '@/components/hero-particles';
 import { HeroVisualFallback } from '@/components/hero-visual-fallback';
 import { WebGLErrorBoundary } from '@/components/webgl-error-boundary';
-import { useMotionReady } from '@/hooks/use-motion-ready';
 import { useWebGLAvailable } from '@/hooks/use-webgl-available';
 
 const HeroScene = dynamic(
@@ -24,7 +23,6 @@ const STATS = [
 ];
 
 export function Hero() {
-  const motionReady = useMotionReady();
   const webglAvailable = useWebGLAvailable();
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { amount: 0.05 });
@@ -54,9 +52,8 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-container flex-col items-center justify-center px-4 pb-28 pt-24 text-center md:px-8 md:pt-28">
         <motion.div
-          key={motionReady ? 'animated' : 'static'}
           variants={heroStagger.container}
-          initial={motionReady ? 'initial' : false}
+          initial="initial"
           animate="animate"
           className="flex flex-col items-center"
         >

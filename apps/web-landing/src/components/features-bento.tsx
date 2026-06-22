@@ -34,7 +34,6 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { cn, RevealOnScroll } from '@eduai365/ui';
-import { useMotionReady } from '@/hooks/use-motion-ready';
 
 /* ────────────────────────────────────────────────── */
 /*  Feature Data                                      */
@@ -264,7 +263,6 @@ const FEATURES: Feature[] = [
 /* ────────────────────────────────────────────────── */
 
 function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
-  const motionReady = useMotionReady();
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -291,7 +289,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
   return (
     <motion.div
       layout
-      initial={motionReady ? { opacity: 0, y: 24, scale: 0.96 } : false}
+      initial={{ opacity: 0, y: 24, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -12, scale: 0.96 }}
       transition={{
