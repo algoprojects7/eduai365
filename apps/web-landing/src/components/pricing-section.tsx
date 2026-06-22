@@ -92,7 +92,7 @@ const FAQS = [
   {
     question: 'What kind of AI support is included?',
     answer:
-      'All plans include the complete AI suite across all 26 modules — AI-powered timetable generation, AI-generated lesson plans, predictive attendance analytics, smart notifications, automated birthday greetings, real-time GPS transport tracking, student safety monitoring via GPS-enabled shoe chips, examination insights, performance forecasting, anomaly detection, and intelligent recommendations. The only difference between plans is the student capacity limit.',
+      'All plans include the complete AI suite across all 27+ modules — AI-powered timetable generation, AI-generated lesson plans, predictive attendance analytics, smart notifications, automated birthday greetings, real-time GPS transport tracking, student safety monitoring via GPS-enabled shoe chips, examination insights, performance forecasting, anomaly detection, and intelligent recommendations. The only difference between plans is the student capacity limit.',
   },
   {
     question: 'How does the GPS student safety monitoring work?',
