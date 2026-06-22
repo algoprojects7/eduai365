@@ -75,7 +75,7 @@ export function TrustedInstitutions({ schools }: TrustedInstitutionsProps) {
         <RevealOnScroll className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-4 text-center">
           <div>
             <h2 className="text-headline-lg font-bold tracking-[-0.01em] text-on-surface md:text-display-lg">
-              Trusted by leading institutions
+              Powering the Future of K–12 Education
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-body-lg text-on-surface-variant">
               Join Schools, and Coaching Centres that run everyday operations in one calm, easy place.
