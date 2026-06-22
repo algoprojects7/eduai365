@@ -86,10 +86,10 @@ export function CtaSection() {
                       Monday — Sunday: 9:00 AM to 7:00 PM (IST)
                     </div>
                     <a
-                      href="mailto:eduai365.erp@gmail.com"
+                      href="mailto:app@algoguido.com"
                       className="mt-1 inline-flex items-center gap-1.5 text-body-sm font-semibold text-ai-cyan hover:underline"
                     >
-                      eduai365.erp@gmail.com
+                     app@algoguido.com
                     </a>
                   </div>
                 </div>
