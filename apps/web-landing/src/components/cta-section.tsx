@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { RevealOnScroll } from '@eduai365/ui';
 
 export function CtaSection() {
@@ -9,12 +8,7 @@ export function CtaSection() {
       <div className="cinematic-aurora opacity-80" aria-hidden />
       <RevealOnScroll className="relative z-10 mx-auto max-w-container">
         <div className="ai-glow-border rounded-2xl px-8 py-14 md:px-14 md:py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <p className="text-label-md font-medium text-ai-cyan">Ready to get started?</p>
             <h2 className="mt-3 text-headline-lg font-bold tracking-[-0.01em] text-gradient-cinematic md:text-display-lg">
               Launch in less than a month.
@@ -95,7 +89,7 @@ export function CtaSection() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </RevealOnScroll>
     </section>
