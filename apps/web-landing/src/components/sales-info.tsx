@@ -75,10 +75,10 @@ export function SalesInfo() {
                         Email Address
                       </p>
                       <a
-                        href="mailto:eduai365.erp@gmail.com"
+                        href="mailto:app@algoguido.com"
                         className="text-body-md font-bold text-secondary hover:text-secondary-container transition-colors"
                       >
-                        eduai365.erp@gmail.com
+                        app@algoguido.com
                       </a>
                     </div>
                   </div>
