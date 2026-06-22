@@ -63,7 +63,7 @@ export function Hero() {
             <div className="premium-badge mb-8 inline-flex items-center gap-2 px-4 py-1.5">
               <Sparkles className="h-4 w-4 text-ai-cyan" aria-hidden />
               <span className="text-label-md font-medium text-ai-cyan">
-                AI-Powered Higher Education OS
+                Explore the AI-Powered Digital Backbone of Modern Schools
               </span>
             </div>
           </motion.div>
@@ -77,7 +77,7 @@ export function Hero() {
               with <span className="text-gradient-ai">insights.</span>
             </span>
             <span className="mt-4 block text-xl font-medium tracking-normal text-white/70 md:text-[1.5rem]">
-              The complete higher education OS
+              The complete AI-Powered School OS
             </span>
           </motion.h1>
 
